@@ -79,11 +79,11 @@ var sets = [
 ];
 
 
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < sets.length; i++) {
   console.log(chalk.blue.bgWhite("Q" + (i + 1) + ":\n"));
   console.log(sets[i].question + "\n");
   console.log(chalk.yellow("Your options are:\n"));
-  for (var j = 0; j < 4; j++) {
+  for (var j = 0; j < sets[i].options.length; j++) {
     console.log(String.fromCharCode(j + 97) + ". " + sets[i].options[j]);
   }
   var userAnswer = readlineSync.question(chalk.magenta("\nEnter your answer: "));
