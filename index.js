@@ -4,10 +4,21 @@ var score = 0;
 
 var userName = readlineSync.question(chalk.yellow("What is your name? "));
 
-console.log(chalk.blue.bgWhite.bold("\n\nWelcome "+userName+" to FRIENDS quiz!!!!"));
+console.log(chalk.blue.bgWhite.bold("\n\nWelcome " + userName + " to FRIENDS quiz!!!!"));
 
 console.log("\n\nAnswer 5 questions to prove your love for FRIENDS!!!\nEnter a, b, c or d as your answers.\nYou will receive 1 point for correct answer and 0 for an incorrect answer.\n\nLet's begin!!!!\n");
 console.log(chalk.cyan("\n------------------------------------------\n"))
+
+var userScores = [
+  {
+    name: 'Hrishita',
+    score: 3
+  },
+  {
+    name: 'Niharika',
+    score: 4
+  }
+]
 
 var sets = [
   {
@@ -68,12 +79,12 @@ var sets = [
 ];
 
 
-for(var i=0; i<5; i++) {
-  console.log(chalk.blue.bgWhite("Q"+(i+1)+":\n"));
-  console.log(sets[i].question+"\n");
+for (var i = 0; i < 5; i++) {
+  console.log(chalk.blue.bgWhite("Q" + (i + 1) + ":\n"));
+  console.log(sets[i].question + "\n");
   console.log(chalk.yellow("Your options are:\n"));
-  for(var j=0; j<4; j++){
-    console.log(String.fromCharCode(j+97)+". "+sets[i].options[j]);
+  for (var j = 0; j < 4; j++) {
+    console.log(String.fromCharCode(j + 97) + ". " + sets[i].options[j]);
   }
   var userAnswer = readlineSync.question(chalk.magenta("\nEnter your answer: "));
 
@@ -81,14 +92,33 @@ for(var i=0; i<5; i++) {
     console.log(chalk.green("\nYay!!!! That's correct!"));
     score++;
   } else {
-    console.log(chalk.red("\nOh no! That's wrong!!\n\n")+"The correct option was "+sets[i].answer);
+    console.log(chalk.red("\nOh no! That's wrong!!\n\n") + "The correct option was " + sets[i].answer);
     console.log(sets[i].explanation);
   }
 
-  console.log(chalk.green.bgMagenta("\nCurrent score is "+score+" "));
+  console.log(chalk.green.bgMagenta("\nCurrent score is " + score + " "));
   console.log("\n------------------------------------------\n")
 }
 
-console.log(chalk.black.bgYellow("Your final score is: "+score+"/5 "));
+console.log(chalk.black.bgYellow("Your final score is: " + score + "/5 "));
+console.log("\n------------------------------------------\n");
+
+var currentHighScore = userScores[0].score;
+var currentHighScoreUser = userScores[0].name;
+for (var i = 0; i < userScores.length; i++) {
+  if (currentHighScore < userScores[i].score) {
+    currentHighScore = userScores[i].score
+    currentHighScoreUser = userScores[i].name
+  }
+}
+
+if (currentHighScore < score) {
+  console.log(chalk.green("You beat the high score of " + currentHighScoreUser + " with " + currentHighScore + " points!!!!\n"));
+  console.log(chalk.yellow("Send the screenshot of this page to me so that I update the high scorer!!!"))
+} else {
+  console.log(chalk.yellow("The current high scorer is " + currentHighScoreUser + " with " + currentHighScore + " points!"));
+}
+console.log("\n-----------------------------------\n")
+
 console.log("\nThank you for playing this quiz!!!\n\nSee you soon!!");
 console.log("\n------------------------------------------\n");
